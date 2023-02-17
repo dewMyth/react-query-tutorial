@@ -6,7 +6,7 @@ const RQSuperHeroesPage = () => {
   const result = useQuery(
     "super-heroes", //key
     () => {
-      return axios.get("http://localhost:4000/superheroes");
+      return axios.get("http://localhost:4000/superhroes");
     } //Promise
   );
 
@@ -20,10 +20,14 @@ const RQSuperHeroesPage = () => {
   // console.log(result);
 
   //we can destruct them
-  const { isLoading, error, data } = result;
+  const { isLoading, error, isError, data } = result;
 
   if (isLoading) {
     return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error: {error.message}</div>;
   }
 
   return (

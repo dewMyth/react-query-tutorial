@@ -9,7 +9,10 @@ const RQSuperHeroesPage = () => {
       return axios.get("http://localhost:4000/superheroes");
     }, //Promise
     {
-      cacheTime: 5000, //5 seconds cache => only keep cache for 5 seconds
+      // cacheTime: 5000, //5 seconds cache => only keep cache for 5 seconds
+      staleTime: 5000, //10 seconds stale => if cache is older than 10 seconds, then fetch again
+      refetchOnMount: true, //Refetch on mount
+      refetchOnWindowFocus: true, //Refetch on window focus => should click the tab to refetch
     }
   );
 

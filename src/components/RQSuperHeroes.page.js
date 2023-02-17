@@ -6,7 +6,7 @@ const RQSuperHeroesPage = () => {
   const result = useQuery(
     "super-heroes", //key
     () => {
-      return axios.get("http://localhost:4000/superhroes");
+      return axios.get("http://localhost:4000/superheroes");
     } //Promise
   );
 

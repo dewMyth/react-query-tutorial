@@ -7,7 +7,10 @@ const RQSuperHeroesPage = () => {
     "super-heroes", //key
     () => {
       return axios.get("http://localhost:4000/superheroes");
-    } //Promise
+    }, //Promise
+    {
+      cacheTime: 5000, //5 seconds cache => only keep cache for 5 seconds
+    }
   );
 
   // This is the same as above, a common approach
@@ -20,7 +23,10 @@ const RQSuperHeroesPage = () => {
   // console.log(result);
 
   //we can destruct them
-  const { isLoading, error, isError, data } = result;
+  const { isLoading, isFetching, error, isError, data } = result;
+
+  console.log("Loading...", isLoading);
+  console.log("Fetching...", isFetching);
 
   if (isLoading) {
     return <div>Loading...</div>;

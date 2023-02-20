@@ -10,9 +10,11 @@ const RQSuperHeroesPage = () => {
     }, //Promise
     {
       // cacheTime: 5000, //5 seconds cache => only keep cache for 5 seconds
-      staleTime: 5000, //10 seconds stale => if cache is older than 10 seconds, then fetch again
-      refetchOnMount: true, //Refetch on mount
-      refetchOnWindowFocus: true, //Refetch on window focus => should click the tab to refetch
+      // staleTime: 5000, //10 seconds stale => if cache is older than 10 seconds, then fetch again
+      // refetchOnMount: true, //Refetch on mount
+      // refetchOnWindowFocus: true, //Refetch on window focus => should click the tab to refetch
+      refetchInterval: 1000, //Refetch every 5 seconds automatically - like real time
+      refetchIntervalInBackground: true, //Refetch in background - Reftch even if the tab is not active
     }
   );
 

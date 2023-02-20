@@ -3,6 +3,14 @@ import React from "react";
 import { useQuery } from "react-query";
 
 const RQSuperHeroesPage = () => {
+  const onSuccess = (data) => {
+    console.log("Success", data);
+  };
+
+  const onError = (error) => {
+    console.log("Error", error);
+  };
+
   const result = useQuery(
     "super-heroes", //key
     () => {
@@ -13,8 +21,10 @@ const RQSuperHeroesPage = () => {
       // staleTime: 5000, //10 seconds stale => if cache is older than 10 seconds, then fetch again
       // refetchOnMount: true, //Refetch on mount
       // refetchOnWindowFocus: true, //Refetch on window focus => should click the tab to refetch
-      refetchInterval: 1000, //Refetch every 5 seconds automatically - like real time
-      refetchIntervalInBackground: true, //Refetch in background - Reftch even if the tab is not active
+      // refetchInterval: 1000, //Refetch every 5 seconds automatically - like real time
+      // refetchIntervalInBackground: true, //Refetch in background - Reftch even if the tab is not active
+      onSuccess: onSuccess,
+      onError: onError,
     }
   );
 

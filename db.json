@@ -41,5 +41,19 @@
       "id" : 6,
       "name" : "Phoebe Buffay"
     }
+  ],
+  "users" : [
+    {
+      "id" : 1,
+      "email" : "jonhdoe@gmail.com",
+      "channelId" : "myChannel"
+    }
+  ],
+  "channels" : [
+    {
+      "id" : "myChannel",
+      "name" : "My Channel",
+      "courses" : ["react", "angular", "vue"]
+    }
   ]
 }

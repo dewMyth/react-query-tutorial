@@ -14,46 +14,55 @@
       "id": 3,
       "name": "Wonder Woman",
       "alterEgo": "Princess Diana"
+    },
+    {
+      "name": "Flash",
+      "alterEgo": "Bary Allen",
+      "id": 4
     }
   ],
-  "friends" : [
+  "friends": [
     {
-      "id" : 1,
-      "name" : "Chandler Bing"
+      "id": 1,
+      "name": "Chandler Bing"
     },
     {
-      "id" : 2,
-      "name" : "Ross Geller"
+      "id": 2,
+      "name": "Ross Geller"
     },
     {
-      "id" : 3,
-      "name" : "Joey Tribbiani"
+      "id": 3,
+      "name": "Joey Tribbiani"
     },
     {
-      "id" : 4,
-      "name" : "Monica Geller"
+      "id": 4,
+      "name": "Monica Geller"
     },
     {
-      "id" : 5,
-      "name" : "Rachel Green"
+      "id": 5,
+      "name": "Rachel Green"
     },
     {
-      "id" : 6,
-      "name" : "Phoebe Buffay"
+      "id": 6,
+      "name": "Phoebe Buffay"
     }
   ],
-  "users" : [
+  "users": [
     {
-      "id" : 1,
-      "email" : "jonhdoe@gmail.com",
-      "channelId" : "myChannel"
+      "id": 1,
+      "email": "jonhdoe@gmail.com",
+      "channelId": "myChannel"
     }
   ],
-  "channels" : [
+  "channels": [
     {
-      "id" : "myChannel",
-      "name" : "My Channel",
-      "courses" : ["react", "angular", "vue"]
+      "id": "myChannel",
+      "name": "My Channel",
+      "courses": [
+        "react",
+        "angular",
+        "vue"
+      ]
     }
   ]
 }

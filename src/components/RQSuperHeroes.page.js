@@ -1,8 +1,16 @@
-import React from "react";
-import { useSupeheroesData } from "../hooks/useSuperHeroesData";
+import React, { useState } from "react";
+import {
+  useSupeheroesData,
+  useAddSuperheroData,
+} from "../hooks/useSuperHeroesData";
 import { Link } from "react-router-dom";
 
 const RQSuperHeroesPage = () => {
+  const [name, setName] = useState("");
+  const [alterEgo, setAlterEgo] = useState("");
+
+  const { mutate: addSuperhero } = useAddSuperheroData();
+
   const onSuccess = (data) => {
     console.log("Success", data);
   };
@@ -28,9 +36,33 @@ const RQSuperHeroesPage = () => {
     return <div>Error: {error.message}</div>;
   }
 
+  const handleAddHero = (e) => {
+    e.preventDefault();
+    const newSuperHero = {
+      name,
+      alterEgo,
+    };
+    addSuperhero(newSuperHero);
+  };
+
   return (
     <>
       <h1>Super Heroes</h1>
+
+      <form>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <input
+          type="text"
+          value={alterEgo}
+          onChange={(e) => setAlterEgo(e.target.value)}
+        />
+        <button onClick={handleAddHero}>Add Hero</button>
+      </form>
+
       {data?.data?.map((hero) => {
         return (
           <div>

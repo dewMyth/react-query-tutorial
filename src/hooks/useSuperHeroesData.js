@@ -29,15 +29,40 @@ const addSuperhero = async (newSuperHero) => {
 export const useAddSuperheroData = () => {
   const queryClient = useQueryClient();
   return useMutation(addSuperhero, {
-    onSuccess: (data) => {
-      // queryClient.invalidateQueries("super-heroes"); //invalidate the cache -> same string as the key
+    // onSuccess: (data) => {
+    //   // queryClient.invalidateQueries("super-heroes"); //invalidate the cache -> same string as the key
 
-      // Using response an update DOM, instead of a newtwork request(refetch)
+    //   // Using response an update DOM, instead of a newtwork request(refetch)
+    //   queryClient.setQueryData("super-heroes", (oldData) => {
+    //     return {
+    //       data: [...oldData.data, data.data], //Append new superhero to the list of superheroes
+    //     };
+    //   });
+    // },
+    onMutate: async (newSuperHero) => {
+      // Update the DOM without a network request
+      await queryClient.cancelQueries("super-heroes"); //Cancel any pending queries
+      const previousHeroData = queryClient.getQueryData("super-heroes"); //Get the current data
       queryClient.setQueryData("super-heroes", (oldData) => {
         return {
-          data: [...oldData.data, data.data], //Append new superhero to the list of superheroes
+          data: [
+            ...oldData.data,
+            {
+              id: oldData?.data?.length + 1,
+              ...newSuperHero,
+            },
+          ], //Append new superhero to the list of superheroes
         };
-      });
+      }); //Set the new data
+      return previousHeroData; //Return the previous data
+    },
+    onError: (_error, _newSuperHero, context) => {
+      //rollback the changes
+      queryClient.setQueryData("super-heroes", context.previousHeroData); //Set the previous data
+    },
+    onSettled: () => {
+      // Send the network request
+      queryClient.invalidateQueries("super-heroes"); //invalidate the cache -> same string as the key
     },
   });
 };

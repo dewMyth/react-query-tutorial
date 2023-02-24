@@ -1,4 +1,4 @@
-import { useQuery, useMutation } from "react-query";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 
 const fetchSuperHeroes = async () => {
@@ -14,8 +14,8 @@ export const useSupeheroesData = (onSuccess, onError) => {
       // staleTime: 5000, //10 seconds stale => if cache is older than 10 seconds, then fetch again
       // refetchOnMount: true, //Refetch on mount
       // refetchOnWindowFocus: true, //Refetch on window focus => should click the tab to refetch
-      refetchInterval: 1000, //Refetch every 5 seconds automatically - like real time
-      refetchIntervalInBackground: true, //Refetch in background - Reftch even if the tab is not active
+      // refetchInterval: 1000, //Refetch every 5 seconds automatically - like real time
+      // refetchIntervalInBackground: true, //Refetch in background - Reftch even if the tab is not active
       onSuccess: onSuccess,
       onError: onError,
     }
@@ -27,5 +27,17 @@ const addSuperhero = async (newSuperHero) => {
 };
 
 export const useAddSuperheroData = () => {
-  return useMutation(addSuperhero);
+  const queryClient = useQueryClient();
+  return useMutation(addSuperhero, {
+    onSuccess: (data) => {
+      // queryClient.invalidateQueries("super-heroes"); //invalidate the cache -> same string as the key
+
+      // Using response an update DOM, instead of a newtwork request(refetch)
+      queryClient.setQueryData("super-heroes", (oldData) => {
+        return {
+          data: [...oldData.data, data.data], //Append new superhero to the list of superheroes
+        };
+      });
+    },
+  });
 };
